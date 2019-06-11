@@ -1,0 +1,42 @@
+{
+  "name": "@braintree/event-emitter",
+  "version": "0.1.0",
+  "description": "A simple event emitter.",
+  "main": "event-emitter.js",
+  "files": [
+    "event-emitter.js"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/braintree/event-emitter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/braintree/event-emitter/issues"
+  },
+  "homepage": "https://github.com/braintree/event-emitter#readme",
+  "devDependencies": {
+    "browserify": "^16.2.3",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-braintree": "^2.0.0",
+    "karma": "^4.1.0",
+    "karma-browserify": "^6.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "mocha": "^6.1.4",
+    "puppeteer": "^1.17.0",
+    "sinon": "^7.3.2",
+    "watchify": "^3.11.1"
+  }
+}
