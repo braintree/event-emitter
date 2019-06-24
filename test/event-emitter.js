@@ -22,6 +22,38 @@ describe('EventEmitter', function () {
     emitter._emit('foo');
   });
 
+  it('can unsubscribe from events', function () {
+    var emitter = new EventEmitter();
+    var spy = sinon.stub();
+
+    emitter.on('foo', spy);
+
+    emitter.off('foo', spy);
+
+    emitter._emit('foo');
+
+    expect(spy.callCount).to.equal(0);
+  });
+
+  it('only unsubscribes from specific function', function () {
+    var emitter = new EventEmitter();
+    var spy1 = sinon.stub();
+    var spy2 = sinon.stub();
+    var spy3 = sinon.stub();
+
+    emitter.on('foo', spy1);
+    emitter.on('foo', spy2);
+    emitter.on('foo', spy3);
+
+    emitter.off('foo', spy2);
+
+    emitter._emit('foo');
+
+    expect(spy1.callCount).to.equal(1);
+    expect(spy2.callCount).to.equal(0);
+    expect(spy3.callCount).to.equal(1);
+  });
+
   it('calls events with arguments', function (done) {
     var expected1 = 'somethinghere';
     var expected2 = 'somethingElse';
