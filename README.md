@@ -38,6 +38,18 @@ obj.on('event-name', function (data) {
 obj._emit('event-name', {payload: 'foo'}); // logs "called with foo!"
 ```
 
+### Unsubscribe from events 
+
+```js
+var obj = new MyClass();
+var cb = function () {};
+
+obj.on('event-name', cb);
+obj.off('event-name', cb);
+
+obj._emit('event-name', {payload: 'foo'}); // cb is not called
+```
+
 ## Tests
 
 ```bash

@@ -12,6 +12,13 @@ EventEmitter.prototype.on = function (event, callback) {
   }
 };
 
+EventEmitter.prototype.off = function (event, callback) {
+  var eventCallbacks = this._events[event];
+  var indexOfCallback = eventCallbacks.indexOf(callback);
+
+  eventCallbacks.splice(indexOfCallback, 1);
+};
+
 EventEmitter.prototype._emit = function (event) {
   var i, args;
   var callbacks = this._events[event];
