@@ -5,6 +5,7 @@ module.exports = function (config) {
     basePath: './',
     frameworks: ['browserify', 'mocha', 'chai'],
     files: [
+      'node_modules/es6-shim/es6-shim.js',
       'test/*.js'
     ],
     preprocessors: {
