@@ -14,7 +14,13 @@ EventEmitter.prototype.on = function (event, callback) {
 
 EventEmitter.prototype.off = function (event, callback) {
   var eventCallbacks = this._events[event];
-  var indexOfCallback = eventCallbacks.indexOf(callback);
+  var indexOfCallback;
+
+  if (!eventCallbacks) {
+    return;
+  }
+
+  indexOfCallback = eventCallbacks.indexOf(callback);
 
   eventCallbacks.splice(indexOfCallback, 1);
 };

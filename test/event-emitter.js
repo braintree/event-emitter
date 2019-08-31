@@ -35,6 +35,15 @@ describe('EventEmitter', function () {
     expect(spy.callCount).to.equal(0);
   });
 
+  it('does not error when unsubscribing from an event that does not exist', function () {
+    var emitter = new EventEmitter();
+    var spy = sinon.stub();
+
+    expect(function () {
+      emitter.off('foo', spy);
+    }).to.not.throw();
+  });
+
   it('only unsubscribes from specific function', function () {
     var emitter = new EventEmitter();
     var spy1 = sinon.stub();
