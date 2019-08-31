@@ -38,6 +38,16 @@ EventEmitter.prototype._emit = function (event) {
   }
 };
 
+EventEmitter.prototype.hasListener = function (event) {
+  var eventCallbacks = this._events[event];
+
+  if (!eventCallbacks) {
+    return false;
+  }
+
+  return eventCallbacks.length > 0;
+};
+
 EventEmitter.createChild = function (ChildObject) {
   ChildObject.prototype = Object.create(EventEmitter.prototype, {
     constructor: ChildObject

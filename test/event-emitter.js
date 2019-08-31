@@ -96,6 +96,19 @@ describe('EventEmitter', function () {
     expect(thirdCallback).not.to.have.beenCalled;
   });
 
+  it('can check if event has listeners', function () {
+    var emitter = new EventEmitter();
+    var noop = sinon.stub();
+
+    emitter.on('a', noop);
+    emitter.on('b', noop);
+    emitter.off('b', noop);
+
+    expect(emitter.hasListener('a')).to.equal(true);
+    expect(emitter.hasListener('b')).to.equal(false);
+    expect(emitter.hasListener('c')).to.equal(false);
+  });
+
   describe('createChild', function () {
     it('can create a child class', function () {
       var child;
