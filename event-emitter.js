@@ -26,16 +26,16 @@ EventEmitter.prototype.off = function (event, callback) {
 };
 
 EventEmitter.prototype.emit = function (event) {
-  var i, args;
+  var args;
   var eventCallbacks = this._events[event];
 
   if (!eventCallbacks) { return; }
 
   args = Array.prototype.slice.call(arguments, 1);
 
-  for (i = 0; i < eventCallbacks.length; i++) {
-    eventCallbacks[i].apply(null, args);
-  }
+  eventCallbacks.forEach(function (callback) {
+    callback.apply(null, args);
+  });
 };
 
 EventEmitter.prototype.hasListener = function (event) {
