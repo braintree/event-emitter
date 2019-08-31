@@ -27,14 +27,14 @@ EventEmitter.prototype.off = function (event, callback) {
 
 EventEmitter.prototype._emit = function (event) {
   var i, args;
-  var callbacks = this._events[event];
+  var eventCallbacks = this._events[event];
 
-  if (!callbacks) { return; }
+  if (!eventCallbacks) { return; }
 
   args = Array.prototype.slice.call(arguments, 1);
 
-  for (i = 0; i < callbacks.length; i++) {
-    callbacks[i].apply(null, args);
+  for (i = 0; i < eventCallbacks.length; i++) {
+    eventCallbacks[i].apply(null, args);
   }
 };
 
