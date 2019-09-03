@@ -14,22 +14,38 @@ EventEmitter.prototype.on = function (event, callback) {
 
 EventEmitter.prototype.off = function (event, callback) {
   var eventCallbacks = this._events[event];
-  var indexOfCallback = eventCallbacks.indexOf(callback);
+  var indexOfCallback;
+
+  if (!eventCallbacks) {
+    return;
+  }
+
+  indexOfCallback = eventCallbacks.indexOf(callback);
 
   eventCallbacks.splice(indexOfCallback, 1);
 };
 
 EventEmitter.prototype._emit = function (event) {
-  var i, args;
-  var callbacks = this._events[event];
+  var args;
+  var eventCallbacks = this._events[event];
 
-  if (!callbacks) { return; }
+  if (!eventCallbacks) { return; }
 
   args = Array.prototype.slice.call(arguments, 1);
 
-  for (i = 0; i < callbacks.length; i++) {
-    callbacks[i].apply(null, args);
+  eventCallbacks.forEach(function (callback) {
+    callback.apply(null, args);
+  });
+};
+
+EventEmitter.prototype.hasListener = function (event) {
+  var eventCallbacks = this._events[event];
+
+  if (!eventCallbacks) {
+    return false;
   }
+
+  return eventCallbacks.length > 0;
 };
 
 EventEmitter.createChild = function (ChildObject) {
