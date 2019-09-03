@@ -8,7 +8,7 @@ describe('EventEmitter', function () {
     var emitter = new EventEmitter();
 
     expect(function () {
-      emitter.emit('foo');
+      emitter._emit('foo');
     }).not.to.throw();
   });
 
@@ -19,7 +19,7 @@ describe('EventEmitter', function () {
       done();
     });
 
-    emitter.emit('foo');
+    emitter._emit('foo');
   });
 
   it('can unsubscribe from events', function () {
@@ -30,7 +30,7 @@ describe('EventEmitter', function () {
 
     emitter.off('foo', spy);
 
-    emitter.emit('foo');
+    emitter._emit('foo');
 
     expect(spy.callCount).to.equal(0);
   });
@@ -56,7 +56,7 @@ describe('EventEmitter', function () {
 
     emitter.off('foo', spy2);
 
-    emitter.emit('foo');
+    emitter._emit('foo');
 
     expect(spy1.callCount).to.equal(1);
     expect(spy2.callCount).to.equal(0);
@@ -74,7 +74,7 @@ describe('EventEmitter', function () {
       done();
     });
 
-    emitter.emit('foo', expected1, expected2);
+    emitter._emit('foo', expected1, expected2);
   });
 
   it('aborts with callbacks that error', function () {
@@ -90,7 +90,7 @@ describe('EventEmitter', function () {
     emitter.on('foo', thirdCallback);
 
     expect(function () {
-      emitter.emit('foo');
+      emitter._emit('foo');
     }).to.throw('danger zone!');
 
     expect(thirdCallback).not.to.have.beenCalled;

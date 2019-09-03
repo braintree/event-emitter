@@ -25,7 +25,7 @@ EventEmitter.prototype.off = function (event, callback) {
   eventCallbacks.splice(indexOfCallback, 1);
 };
 
-EventEmitter.prototype.emit = function (event) {
+EventEmitter.prototype._emit = function (event) {
   var args;
   var eventCallbacks = this._events[event];
 
