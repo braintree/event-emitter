@@ -1,7 +1,7 @@
 const EventEmitter = require('../event-emitter');
 
 describe('EventEmitter', () => {
-  test('can emit when no one is listening', () => {
+  it('can emit when no one is listening', () => {
     const emitter = new EventEmitter();
 
     expect(function () {
@@ -9,7 +9,7 @@ describe('EventEmitter', () => {
     }).not.toThrowError();
   });
 
-  test('can subscribe to events', done => {
+  it('can subscribe to events', done => {
     const emitter = new EventEmitter();
 
     emitter.on('foo', function () {
@@ -19,7 +19,7 @@ describe('EventEmitter', () => {
     emitter._emit('foo');
   });
 
-  test('can unsubscribe from events', () => {
+  it('can unsubscribe from events', () => {
     const emitter = new EventEmitter();
     const spy = jest.fn();
 
@@ -32,19 +32,16 @@ describe('EventEmitter', () => {
     expect(spy).not.toBeCalled();
   });
 
-  test(
-    'does not error when unsubscribing from an event that does not exist',
-    () => {
-      const emitter = new EventEmitter();
-      const spy = jest.fn();
+  it('does not error when unsubscribing from an event that does not exist', () => {
+    const emitter = new EventEmitter();
+    const spy = jest.fn();
 
-      expect(function () {
-        emitter.off('foo', spy);
-      }).not.toThrowError();
-    }
-  );
+    expect(function () {
+      emitter.off('foo', spy);
+    }).not.toThrowError();
+  });
 
-  test('only unsubscribes from specific function', () => {
+  it('only unsubscribes from specific function', () => {
     const emitter = new EventEmitter();
     const spy1 = jest.fn();
     const spy2 = jest.fn();
@@ -63,7 +60,7 @@ describe('EventEmitter', () => {
     expect(spy3).toBeCalledTimes(1);
   });
 
-  test('calls events with arguments', done => {
+  it('calls events with arguments', done => {
     const expected1 = 'somethinghere';
     const expected2 = 'somethingElse';
     const emitter = new EventEmitter();
@@ -77,7 +74,7 @@ describe('EventEmitter', () => {
     emitter._emit('foo', expected1, expected2);
   });
 
-  test('aborts with callbacks that error', () => {
+  it('aborts with callbacks that error', () => {
     const emitter = new EventEmitter();
     const thirdCallback = jest.fn();
 
@@ -96,7 +93,7 @@ describe('EventEmitter', () => {
     expect(thirdCallback).not.toBeCalled();
   });
 
-  test('can check if event has listeners', () => {
+  it('can check if event has listeners', () => {
     const emitter = new EventEmitter();
     const noop = jest.fn();
 
@@ -110,7 +107,7 @@ describe('EventEmitter', () => {
   });
 
   describe('createChild', () => {
-    test('can create a child class', () => {
+    it('can create a child class', () => {
       let child;
 
       function ChildClass() {
