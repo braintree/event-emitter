@@ -7,6 +7,7 @@
     "event-emitter.js"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "prebuild": "prettier --write .",
     "build": "tsc",
     "lint": "eslint --ext js,ts .",
