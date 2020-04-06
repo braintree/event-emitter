@@ -3,13 +3,14 @@
   "version": "0.3.0",
   "description": "A simple event emitter.",
   "main": "dist/event-emitter.js",
+  "types": "dist/event-emitter.d.ts",
   "files": [
     "event-emitter.js"
   ],
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "prettier --write .",
-    "build": "tsc",
+    "build": "tsc --declaration",
     "lint": "eslint --ext js,ts .",
     "posttest": "npm run lint",
     "test": "jest"
