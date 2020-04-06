@@ -2,7 +2,7 @@
   "name": "@braintree/event-emitter",
   "version": "0.3.0",
   "description": "A simple event emitter.",
-  "main": "event-emitter.js",
+  "main": "dist/event-emitter.js",
   "files": [
     "event-emitter.js"
   ],
