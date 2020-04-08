@@ -1,3 +1,6 @@
+# unreleased
+* Add typescript types
+
 # 0.3.0
 
 - Fix issue where `off` would throw an error if no events existed for named event
