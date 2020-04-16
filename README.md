@@ -17,37 +17,37 @@ This module uses commonjs. You must use a build tool such as [Browserify](http:/
 ### Creating an Object that Inherits from Event Emitter
 
 ```js
-var EventEmitter = require('@braintree/event-emitter');
+var EventEmitter = require("@braintree/event-emitter");
 
-function MyClass () {
+function MyClass() {
   EventEmitter.call(this);
 }
 
 MyClass.prototype = EventEmitter.createChild(MyClass);
 ```
 
-### Listen for events 
+### Listen for events
 
 ```js
 var obj = new MyClass();
 
-obj.on('event-name', function (data) {
-  console.log('called with', data.payload, '!');
+obj.on("event-name", function (data) {
+  console.log("called with", data.payload, "!");
 });
 
-obj._emit('event-name', {payload: 'foo'}); // logs "called with foo!"
+obj._emit("event-name", { payload: "foo" }); // logs "called with foo!"
 ```
 
-### Unsubscribe from events 
+### Unsubscribe from events
 
 ```js
 var obj = new MyClass();
 var cb = function () {};
 
-obj.on('event-name', cb);
-obj.off('event-name', cb);
+obj.on("event-name", cb);
+obj.off("event-name", cb);
 
-obj._emit('event-name', {payload: 'foo'}); // cb is not called
+obj._emit("event-name", { payload: "foo" }); // cb is not called
 ```
 
 ## Tests

@@ -2,12 +2,16 @@
   "name": "@braintree/event-emitter",
   "version": "0.3.0",
   "description": "A simple event emitter.",
-  "main": "event-emitter.js",
+  "main": "dist/event-emitter.js",
+  "types": "dist/event-emitter.d.ts",
   "files": [
     "event-emitter.js"
   ],
   "scripts": {
-    "lint": "eslint .",
+    "prepublishOnly": "npm run build",
+    "prebuild": "prettier --write .",
+    "build": "tsc --declaration",
+    "lint": "eslint --ext js,ts .",
     "posttest": "npm run lint",
     "test": "jest"
   },
@@ -23,8 +27,15 @@
   },
   "homepage": "https://github.com/braintree/event-emitter#readme",
   "devDependencies": {
+    "@types/jest": "^25.2.1",
     "eslint": "^6.8.0",
-    "eslint-config-braintree": "^4.0.0",
-    "jest": "^25.1.0"
+    "eslint-config-braintree": "^5.0.0-typescript-prep-rc.17",
+    "jest": "^25.3.0",
+    "prettier": "^2.0.4",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "ts-jest"
   }
 }
