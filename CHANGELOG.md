@@ -1,3 +1,7 @@
+# 0.4.1
+
+- Add missing type defs to package
+
 # 0.4.0
 
 - Add typescript types
