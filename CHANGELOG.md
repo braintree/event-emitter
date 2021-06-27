@@ -1,3 +1,22 @@
+# unreleased
+- in Typescript, `on` can specify event payload type as a Generic
+
+  ```typescript
+  type EventPayload = {
+    foo: string;
+  };
+
+  emitter.on<EventPayload>("event-name", (payload) => {
+    // payload is of type EventPayload
+  });
+  ```
+
+_Breaking Changes_
+
+- remove `createChild` helper
+- `_emit` has been renamed to `emit`
+- `emit` now only takes one event payload argument instead of any number of arguments
+
 # 0.4.1
 
 - Add missing type defs to package
