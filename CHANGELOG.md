@@ -1,4 +1,5 @@
 # 1.0.0
+
 - in Typescript, `on` can specify event payload type as a Generic
 
   ```typescript
