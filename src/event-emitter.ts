@@ -1,4 +1,4 @@
-type CallbackFunction<T = unknown> = (eventPayload: T) => void;
+type CallbackFunction<T = unknown> = (eventPayload?: T) => void;
 
 class EventEmitter {
   _events: Record<string, CallbackFunction[]>;

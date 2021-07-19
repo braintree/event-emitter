@@ -1,3 +1,6 @@
+# 1.0.1
+- Correct Typescript typing where callback function for `on` does not require an argument
+
 # 1.0.0
 
 - in Typescript, `on` can specify event payload type as a Generic
