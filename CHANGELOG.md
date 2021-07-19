@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Revert incorrect Typescript typing where callback function for `on`
+
 # 1.0.1
 
 - Correct Typescript typing where callback function for `on` does not require an argument
