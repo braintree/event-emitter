@@ -1,3 +1,11 @@
+# UNRELEASED
+
+ - Dependency Updates
+   - Update eslint to v8.47.0
+   - Update jest to v29.5.0
+   - Update prettier to v3
+   - Update typescript to v5.1.65
+
 # 1.0.2
 
 - Revert incorrect Typescript typing where callback function for `on`
