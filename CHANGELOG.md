@@ -2,6 +2,7 @@
 
  - Dependency Updates
    - Update eslint to v8.47.0
+   - Update eslint-plugin-prettier to v5
    - Update jest to v29.5.0
    - Update prettier to v3
    - Update typescript to v5.1.65
