@@ -1,6 +1,7 @@
 # UNRELEASED
 
-- Update to node v18
+ - Dependency Updates
+   - Update to node v18
 
  - Dev Dependency Updates
    - Update eslint to v8.47.0
