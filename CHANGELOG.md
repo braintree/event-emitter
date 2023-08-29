@@ -1,6 +1,8 @@
 # UNRELEASED
 
- - Dependency Updates
+- Update to node v18
+
+ - Dev Dependency Updates
    - Update eslint to v8.47.0
    - Update eslint-plugin-prettier to v5
    - Update jest to v29.5.0
