@@ -1,6 +1,6 @@
-# UNRELEASED
+# 2.0.0
 
- - Dependency Updates
+ - BREAKING CHANGES
    - Update to node v18
 
  - Dev Dependency Updates
