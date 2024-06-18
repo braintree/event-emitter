@@ -1,3 +1,7 @@
+# 2.0.1
+
+- Update braces 3.0.3
+
 # 2.0.0
 
  - BREAKING CHANGES
