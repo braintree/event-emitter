@@ -1,4 +1,4 @@
-# UNRELEASED
+# 2.0.1
 
 - Update braces to 3.0.3
 
