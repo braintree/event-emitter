@@ -35,13 +35,11 @@ body:
       value: 
     validations:
       required: true
-  - type: dropdown
+  - type: textarea
     id: browsers
     attributes:
       label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+      description: List browsers where you see the problem reported.
+      placeholder: 'For each browser specify 1) operating system and version 2) browser name and version'
+      value: 'OS browser version'
+      
