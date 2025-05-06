@@ -20,9 +20,9 @@ body:
   - type: markdown
       attributes:
         value: |
-          * Please provide a detailed description of proposed feature. 
-          * What problem would this new feature solve? 
-          * Is it a modification to existing functionality? Are you requesting a new/modified function input or output? Please provide an example of what the change might look like?
+          ˃ Please provide a detailed description of proposed feature. 
+          ˃ What problem would this new feature solve? 
+          ˃ Is it a modification to existing functionality? Are you requesting a new/modified function input or output? Please provide an example of what the change might look like?
   - type: textarea
     id: detailed-description
     attributes:
