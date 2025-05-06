@@ -12,24 +12,19 @@ body:
     id: feat-summary
     attributes:
       label: Feature Summary
-      description: Summarize requested feature in a few words
-      placeholder: 'New thing that does something'
-      value: 'New feature'
+      description: In a few sentences or less, provide a concise description of the feature being requested.
+      placeholder: 'New feature that does ___; it can be used when ...'
     validations:
       required: true
-  - type: markdown
-      attributes:
-        value: |
-          ˃ Please provide a detailed description of proposed feature. 
-          ˃ What problem would this new feature solve? 
-          ˃ Is it a modification to existing functionality? Are you requesting a new/modified function input or output? Please provide an example of what the change might look like?
   - type: textarea
     id: detailed-description
     attributes:
-      label: Detail new requested feature.  
-      description: How will this change affect to users? 
+      label: Detailed description of new feature.
+      description: |
+        Please provide a detailed description of proposed feature.
+          - What problem would this new feature solve?
+          - How will this change affect users?
+          - Is it a modification to existing functionality? Are you requesting a new/modified function input or output? Please provide an example of what the change might look like?
       placeholder: 'New feature details.'
-      value: ''
     validations:
       required: true
-
