@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## UNRELEASED
+
+- Updates dependencies
+  - @babel/parser to 7.27.2
+  - @babel/template to 7.27.2
+  - @babel/types to 7.27.2
+  - @babel/code-frame to 7.27.1
+  - @babel/helper-validator-identifier to 7.27.1
+  - @babel/helper-string-parser to 7.27.1
+  - @babel/highlight to 7.27.1
+  - @babel/template to 7.27.1
+
 ## 2.0.2
 
 - Update (sub-)dependencies
