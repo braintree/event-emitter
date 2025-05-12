@@ -43,11 +43,6 @@ jobs:
             exit 1
           fi
 
-      - name: Update package.json version for testing
-        run: |
-          sed -i 's/"version": "3.96.3"/"version": "3.96.15-0"/i' package.json
-          git commit -m "update version for testing" package.json
-          
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
