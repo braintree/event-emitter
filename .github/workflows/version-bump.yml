@@ -29,8 +29,7 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        run: |
-          git checkout -b release-$todaynow
+        uses: actions/checkout@v4
 
       - name: Configure Github Credentials
         run: |
@@ -85,7 +84,13 @@ jobs:
 
       - name: Create PR
         run: |
-          gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head nonrelease/v${{ env.new_version }}
-          echo "#### Created PR for non-release" >> $GITHUB_STEP_SUMMARY
+          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head nonrelease/v${{ env.new_version }})
+          echo "pr_url=$pr_url" >> $GITHUB_ENV
+          echo "#### Created PR ($pr_url) for non-release" >> $GITHUB_STEP_SUMMARY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge PR
+        run: |
+          pr_number=$(echo ${{ env.pr_url }} | awk -F/ '{print $NF}')
+          gh pr merge $pr_number --merge --delete-branch
+          echo "####  Merged PR" >> $GITHUB_STEP_SUMMARY
