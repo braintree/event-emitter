@@ -55,8 +55,9 @@ jobs:
 
       - name: Bump npm version
         run: |
-          new_version=$(npm version prepatch)
+          new_version=$(npm version ${{ inputs.version_type }})
           echo "new_version=$(echo $new_version | sed 's/v//')" >> $GITHUB_ENV
+          echo "${{ inputs.version_type }} version bump" >> $GITHUB_STEP_SUMMARY
           echo "New version: ${new_version}. Branch tagged." >> $GITHUB_STEP_SUMMARY
 
       - name: Update changelog
