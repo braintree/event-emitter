@@ -43,11 +43,6 @@ jobs:
             exit 1
           fi
 
-      - name: Update package.json version for testing
-        run: |
-          sed -i 's/"version": "3.96.3"/"version": "3.96.15-0"/i' package.json
-          git commit -m "update version for testing" package.json
-          
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -74,19 +69,19 @@ jobs:
       - name: create release branch
         id: create_branch
         run: |
-          git checkout -b nonrelease/v${{ env.new_version }}
-          echo "#### Created release branch: nonrelease/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
+          git checkout -b release/v${{ env.new_version }}
+          echo "#### Created release branch: release/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Push changes
         run: |
-          git push -u origin nonrelease/v${{ env.new_version }} --tags
-          echo "#### Pushed release branch: nonrelease/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
+          git push -u origin release/v${{ env.new_version }} --tags
+          echo "#### Pushed release branch: release/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Create PR
         run: |
-          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head nonrelease/v${{ env.new_version }})
+          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head release/v${{ env.new_version }})
           echo "pr_url=$pr_url" >> $GITHUB_ENV
-          echo "#### Created PR ($pr_url) for non-release" >> $GITHUB_STEP_SUMMARY
+          echo "#### Created PR ($pr_url) for release" >> $GITHUB_STEP_SUMMARY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Merge PR
@@ -94,3 +89,7 @@ jobs:
           pr_number=$(echo ${{ env.pr_url }} | awk -F/ '{print $NF}')
           gh pr merge $pr_number --merge --delete-branch
           echo "####  Merged PR" >> $GITHUB_STEP_SUMMARY
+      - name: Tag
+        run: |
+          git tag -m ${{ env.new_version }} ${{ env.new_version }}
+          git push origin main --tags
