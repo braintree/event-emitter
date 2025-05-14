@@ -80,7 +80,7 @@ jobs:
 
       - name: Create PR
         run: |
-          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head release/v${{ env.new_version }})
+          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base main --head release/v${{ env.new_version }})
           echo "pr_url=$pr_url" >> $GITHUB_ENV
           echo "#### Created PR ($pr_url) for release" >> $GITHUB_STEP_SUMMARY
         env:
