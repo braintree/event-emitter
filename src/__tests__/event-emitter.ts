@@ -5,7 +5,7 @@ describe("EventEmitter", () => {
     const emitter = new EventEmitter();
 
     expect(function () {
-      emitter._emit("foo");
+      emitter.emit("foo");
     }).not.toThrowError();
   });
 
@@ -16,7 +16,7 @@ describe("EventEmitter", () => {
       done();
     });
 
-    emitter._emit("foo");
+    emitter.emit("foo");
   });
 
   it("can unsubscribe from events", () => {
@@ -27,7 +27,7 @@ describe("EventEmitter", () => {
 
     emitter.off("foo", spy);
 
-    emitter._emit("foo");
+    emitter.emit("foo");
 
     expect(spy).not.toBeCalled();
   });
@@ -53,25 +53,23 @@ describe("EventEmitter", () => {
 
     emitter.off("foo", spy2);
 
-    emitter._emit("foo");
+    emitter.emit("foo");
 
     expect(spy1).toBeCalledTimes(1);
     expect(spy2).toBeCalledTimes(0);
     expect(spy3).toBeCalledTimes(1);
   });
 
-  it("calls events with arguments", (done) => {
-    const expected1 = "somethinghere";
-    const expected2 = "somethingElse";
+  it("calls events with payload", (done) => {
+    const expected = "somethinghere";
     const emitter = new EventEmitter();
 
-    emitter.on("foo", function (actual1, actual2) {
-      expect(actual1).toBe(expected1);
-      expect(actual2).toBe(expected2);
+    emitter.on("foo", function (actual) {
+      expect(actual).toBe(expected);
       done();
     });
 
-    emitter._emit("foo", expected1, expected2);
+    emitter.emit("foo", expected);
   });
 
   it("aborts with callbacks that error", () => {
@@ -89,7 +87,7 @@ describe("EventEmitter", () => {
     emitter.on("foo", thirdCallback);
 
     expect(function () {
-      emitter._emit("foo");
+      emitter.emit("foo");
     }).toThrowError("danger zone!");
 
     expect(thirdCallback).not.toBeCalled();
@@ -106,19 +104,5 @@ describe("EventEmitter", () => {
     expect(emitter.hasListener("a")).toBe(true);
     expect(emitter.hasListener("b")).toBe(false);
     expect(emitter.hasListener("c")).toBe(false);
-  });
-
-  describe("createChild", () => {
-    it("can create a child class", () => {
-      function ChildClass(): void {
-        EventEmitter.call(this);
-      }
-
-      EventEmitter.createChild(ChildClass);
-
-      const child = new ChildClass();
-
-      expect(child).toBeInstanceOf(EventEmitter);
-    });
   });
 });

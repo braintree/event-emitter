@@ -1,0 +1,98 @@
+# This workflow will bump the version
+
+name: Bump version and update changelog
+
+on:
+  workflow_call:
+    inputs:
+      version_type:
+        description: "Version bump type (major, minor, patch)"
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version bump type (major, minor, patch)"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  version_bump:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Configure Github Credentials
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Check Changelog
+        run: |
+          if ! grep -i -q "## UNRELEASED" CHANGELOG.md; then
+            echo "Error: 'UNRELEASED' not found in CHANGELOG.md. Please ensure the changelog is correctly formatted."
+            exit 1
+          fi
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Bump npm version
+        run: |
+          new_version=$(npm version ${{ inputs.version_type }})
+          echo "new_version=$(echo $new_version | sed 's/v//')" >> $GITHUB_ENV
+          echo "${{ inputs.version_type }} version bump" >> $GITHUB_STEP_SUMMARY
+          echo "New version: ${new_version}. Branch tagged." >> $GITHUB_STEP_SUMMARY
+
+      - name: Update changelog
+        run: |
+          today=$(date +'%Y-%m-%d')
+          sed -i "s/## unreleased/## ${{ env.new_version }} (${today})/i" CHANGELOG.md
+          echo "#### Update CHANGELOG.md" >> $GITHUB_STEP_SUMMARY
+
+      - name: Commit changes
+        run: |
+          git add --all
+          git commit -m "Changelog for v${{ env.new_version }}"
+          echo "#### Committed CHANGELOG.md changes" >> $GITHUB_STEP_SUMMARY
+
+      - name: create release branch
+        id: create_branch
+        run: |
+          git checkout -b release/v${{ env.new_version }}
+          echo "#### Created release branch: release/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Push changes
+        run: |
+          git push -u origin release/v${{ env.new_version }} --tags
+          echo "#### Pushed release branch: release/v${{ env.new_version }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Create PR
+        run: |
+          pr_url=$(gh pr create --title "Release v${{ env.new_version }}" --body "Updated changelog for release v${{ env.new_version }}" --base master --head release/v${{ env.new_version }})
+          echo "pr_url=$pr_url" >> $GITHUB_ENV
+          echo "#### Created PR ($pr_url) for release" >> $GITHUB_STEP_SUMMARY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge PR
+        run: |
+          pr_number=$(echo ${{ env.pr_url }} | awk -F/ '{print $NF}')
+          gh pr merge $pr_number --merge --delete-branch
+          echo "####  Merged PR" >> $GITHUB_STEP_SUMMARY
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tag
+        run: |
+          git tag -m ${{ env.new_version }} ${{ env.new_version }}
+          git push origin main --tags
