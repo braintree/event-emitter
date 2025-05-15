@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## UNRELEASED
+## 2.0.3 (2025-05-15)
 
 - Updates dependencies
   - @babel/parser to 7.27.2
