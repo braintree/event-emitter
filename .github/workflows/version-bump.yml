@@ -88,7 +88,7 @@ jobs:
       - name: Merge PR
         run: |
           pr_number=$(echo ${{ env.pr_url }} | awk -F/ '{print $NF}')
-          gh pr merge $pr_number --merge --delete-branch
+          gh pr merge $pr_number --admin --merge --delete-branch
           echo "####  Merged PR" >> $GITHUB_STEP_SUMMARY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
