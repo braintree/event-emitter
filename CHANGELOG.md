@@ -11,6 +11,14 @@
   - @babel/helper-string-parser to 7.27.1
   - @babel/highlight to 7.27.1
   - @babel/template to 7.27.1
+  - @types/jest to 30.0.0
+  - eslint to 8.57.1
+  - eslint-plugin-prettier to 5.5.4
+  - jest to 30.2.0
+  - prettier to 3.7.4
+  - ts-jest to 29.4.6
+  - typescript to 5.9.3
+- Update Node to v24
 
 ## 2.0.2
 

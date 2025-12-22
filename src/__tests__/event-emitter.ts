@@ -6,7 +6,7 @@ describe("EventEmitter", () => {
 
     expect(function () {
       emitter.emit("foo");
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 
   it("can subscribe to events", (done) => {
@@ -29,7 +29,7 @@ describe("EventEmitter", () => {
 
     emitter.emit("foo");
 
-    expect(spy).not.toBeCalled();
+    expect(spy).not.toHaveBeenCalled();
   });
 
   it("does not error when unsubscribing from an event that does not exist", () => {
@@ -38,7 +38,7 @@ describe("EventEmitter", () => {
 
     expect(function () {
       emitter.off("foo", spy);
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 
   it("only unsubscribes from specific function", () => {
@@ -55,9 +55,9 @@ describe("EventEmitter", () => {
 
     emitter.emit("foo");
 
-    expect(spy1).toBeCalledTimes(1);
-    expect(spy2).toBeCalledTimes(0);
-    expect(spy3).toBeCalledTimes(1);
+    expect(spy1).toHaveBeenCalledTimes(1);
+    expect(spy2).toHaveBeenCalledTimes(0);
+    expect(spy3).toHaveBeenCalledTimes(1);
   });
 
   it("calls events with payload", (done) => {
@@ -88,9 +88,9 @@ describe("EventEmitter", () => {
 
     expect(function () {
       emitter.emit("foo");
-    }).toThrowError("danger zone!");
+    }).toThrow("danger zone!");
 
-    expect(thirdCallback).not.toBeCalled();
+    expect(thirdCallback).not.toHaveBeenCalled();
   });
 
   it("can check if event has listeners", () => {
