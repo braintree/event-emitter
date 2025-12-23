@@ -32,7 +32,7 @@ body:
       label: Version
       description: What version of this library are you running?
       placeholder: "v0.0.0"
-      value: 
+      value:
     validations:
       required: true
   - type: textarea
@@ -44,5 +44,4 @@ body:
           * Mac OS 15.3.5, Chrome 130.0.1234.987
           * Android 14, Firefox 133.0
           * iPadOS 17.1, Safari
-      placeholder: 'For each browser specify 1) operating system and version 2) browser name and version'
-
+      placeholder: "For each browser specify 1) operating system and version 2) browser name and version"

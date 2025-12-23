@@ -48,4 +48,3 @@ jobs:
   publish-release:
     needs: publish-npm
     uses: ./.github/workflows/release-notes.yml
-
