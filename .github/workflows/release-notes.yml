@@ -41,4 +41,3 @@ jobs:
           body: "${{ env.release_details }}"
           draft: false
           prerelease: false
-

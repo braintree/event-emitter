@@ -15,4 +15,3 @@
 ### Reviewers
 
 @braintree/team-sdk-js
-
