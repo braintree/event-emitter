@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/braintree/event-emitter#readme",
   "devDependencies": {
+    "@types/node": "^24.0.0",
     "@types/jest": "^30.0.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "eslint": "^8.57.1",
