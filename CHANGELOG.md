@@ -65,11 +65,10 @@
   });
   ```
 
-_Breaking Changes_
-
-- remove `createChild` helper
-- `_emit` has been renamed to `emit`
-- `emit` now only takes one event payload argument instead of any number of arguments
+- Breaking Changes
+  - remove `createChild` helper
+  - `_emit` has been renamed to `emit`
+  - `emit` now only takes one event payload argument instead of any number of arguments
 
 ## 0.4.1
 
