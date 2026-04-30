@@ -3,23 +3,15 @@ name: "CI"
 on:
   push:
     branches:
-      - "main"
+      - main
   workflow_dispatch:
-  workflow_call:
   pull_request:
     branches:
       - "*"
 
-jobs:
-  build:
-    name: "Unit Tests on Ubuntu"
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-      - run: npm install
-      - run: npm test
+jobs:
+  ci:
+    uses: braintree/web-sdk-github-actions/.github/workflows/ci.yml@17a3922575160e8e3ffdb7ecc76c6a3dbfd6a50a
